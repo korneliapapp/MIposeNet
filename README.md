@@ -1,15 +1,6 @@
-# ml-posenet
+# MI poseNet
+Downloaded ml-posenet from Clint's interactivity-master repo 
 
-
-# Read more
-
-* [Google's demo](https://github.com/tensorflow/tfjs-models/tree/master/posenet)
-* [Canvas](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/) (MDN)
-
-# Bundles
-
-To make for more robust sketches, a snapshot of these libraries is included:
-
-* [TensorFlow.js](https://cdn.jsdelivr.net/npm/@tensorflow/tfjs)
-* [posenet model](https://cdn.jsdelivr.net/npm/@tensorflow-models/posenet)
-
+# Functions
+- posenet is a js library with built-in machine learning functionality that detects specific body parts or so-called "poses" 
+- In this modified example, the computer plays an output of a musical tone whenever two shoulders of two different people come close together
