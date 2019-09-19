@@ -5,6 +5,7 @@ const resultsEl = document.getElementById('results');
 const poseColours = [];
 
 var audio = new Audio('sound.mp3')
+var song = new Audio('song.wav')
 
 
 /*document.getElementById('btnFreeze').addEventListener('click', evt => {
@@ -91,28 +92,57 @@ if(poses.length == 2 && poses[0].score > 0.3){
     const shoulderDiff1 = Math.floor(Math.abs(leftShouldery.x - rightShoulderx.x));
     const shoulderDiff2 = Math.floor(Math.abs(leftShoulderx.x - rightShouldery.x));
 
-    if (shoulderDiff1 < 800 || shoulderDiff2 < 800){
+    var shoulderDiff = Math.min(shoulderDiff1, shoulderDiff2);
+
+    if (shoulderDiff < 300 ) {
       audio.play();
-      audio.volume = 1.0;
-      console.log("It works! 100% Volume");
+      audio.volume = shoulderDiff / 300; 
+      console.log(audio.volume); 
+      console.log("It plays!");
+    } else {
+      audio.pause();
+      console.log("It pauses!")
     }
 
-    if (shoulderDiff1 < 400 || shoulderDiff2 < 400){
-      audio.play();
-      audio.volume = 0.5;
-      console.log("It works! 50% Volume");
-    }
 
-    if (shoulderDiff1 < 90 || shoulderDiff2 < 90){
-      audio.play();
-      audio.volume = 0.0;
-      console.log("It works! NO Volume");
-    }
     
     //mostly to check if it's working
     var c = canvasEl.getContext('2d');
     c.fillStyle = 'black';
     c.fillText('Shoulder Difference 1: ' + shoulderDiff1 + 'Shoulder Difference 2:' + shoulderDiff2 , 100, 10);
+  
+}
+
+
+
+//Using shoulder positions between two people (precisely the left shoulder of the person one and right shoulder of person two)
+//when the difference of the shoulder distance lowers down to less than 100, an audio output plays 
+//Try adding it up to 5 people??? 
+if(poses.length == 2 && poses[0].score > 0.3){
+  
+
+  //getting keypoints for left & right shoulder of two objects
+  const leftWristx = getKeypointPos(poses, 'leftWrist', 0);
+  const rightWristx = getKeypointPos(poses, 'rightWrist', 0);
+
+  const leftWristy = getKeypointPos(poses, 'leftWrist', 1);
+  const rightWristy = getKeypointPos(poses, 'rightWrist', 1);
+
+
+  
+    const wristDiff1 = Math.floor(Math.abs(leftWristy.x - rightWristx.x));
+    const wristDiff2 = Math.floor(Math.abs(leftWristx.x - rightWristy.x));
+
+
+    if (wristDiff1 < 50 || wristDiff2 < 50){
+      song.play();
+      console.log('BRING IN THE DRUMS');
+    }
+    
+    //mostly to check if it's working
+    var c = canvasEl.getContext('2d');
+    c.fillStyle = 'black';
+    c.fillText('Wrist Difference 1: ' + wristDiff1 + 'Wrist Difference 2:' + wristDiff2 , 100, 10);
   
 }
 
