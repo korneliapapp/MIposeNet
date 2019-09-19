@@ -1,0 +1,28 @@
+.hidden {
+  display: none;
+}
+
+#btnFreeze {
+  display: none;
+}
+
+#canvas {
+  position: absolute;
+  display: none;
+	left: 50%;
+	top: 50%;
+	margin-left: -300px; /* This is half the width */
+	margin-top: -200px; /* This is half the height */
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+#rectangle {
+  margin-left: 850px;
+  margin-top: -100px;
+}
