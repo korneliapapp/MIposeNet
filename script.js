@@ -4,15 +4,16 @@ const canvasEl = document.getElementById('canvas');
 const resultsEl = document.getElementById('results');
 const poseColours = [];
 
-var audio = new Audio('magicpling.mp3')
+var audio = new Audio('sound.mp3')
 
-document.getElementById('btnFreeze').addEventListener('click', evt => {
+
+/*document.getElementById('btnFreeze').addEventListener('click', evt => {
   if (cameraEl.paused) {
     cameraEl.play();
   } else {
     cameraEl.pause();
   }
-});
+});*/
 
 console.log('Loading posenet model')
 
@@ -90,11 +91,24 @@ if(poses.length == 2 && poses[0].score > 0.3){
     const shoulderDiff1 = Math.floor(Math.abs(leftShouldery.x - rightShoulderx.x));
     const shoulderDiff2 = Math.floor(Math.abs(leftShoulderx.x - rightShouldery.x));
 
-    if (shoulderDiff1 < 100 || shoulderDiff2 < 100){
+    if (shoulderDiff1 < 800 || shoulderDiff2 < 800){
       audio.play();
-      console.log("It works!");
+      audio.volume = 1.0;
+      console.log("It works! 100% Volume");
     }
 
+    if (shoulderDiff1 < 400 || shoulderDiff2 < 400){
+      audio.play();
+      audio.volume = 0.5;
+      console.log("It works! 50% Volume");
+    }
+
+    if (shoulderDiff1 < 90 || shoulderDiff2 < 90){
+      audio.play();
+      audio.volume = 0.0;
+      console.log("It works! NO Volume");
+    }
+    
     //mostly to check if it's working
     var c = canvasEl.getContext('2d');
     c.fillStyle = 'black';
